@@ -61,6 +61,8 @@
 
     <br></br>
     <button type="button" onclick="crearActualizarAlimento()">Guardar</button>
+    <button type="button" onclick="ActualizarAlimento()">Actualizar</button>
+
   </form>
 
   <table id="tablaAlimentos">
@@ -114,6 +116,48 @@
 
         push(ref(database, 'Mercedes_Gomez'), alimentoData);
     }
+
+    window.actualizarAlimento = function () {
+    try {
+        // Obtén la clave del alimento actualmente en edición
+        const key = document.getElementById("alimentoForm").getAttribute("data-key");
+
+        // Obtén los nuevos valores de los campos de entrada
+        const nombre = document.getElementById("nombre").value;
+        const tipo = document.getElementById("tipo").value;
+        const nutricion = document.getElementById("nutricion").value;
+        const preparacion = document.getElementById("preparacion").value;
+        const fuente = document.getElementById("fuente").value;
+
+        // Actualiza los valores en la base de datos
+        update(ref(database, 'Mercedes_Gomez/' + key), {
+            nombre: nombre,
+            tipo: tipo,
+            nutricion: nutricion,
+            preparacion: preparacion,
+            fuente: fuente
+        });
+
+        // Limpia los campos de entrada después de la actualización
+        limpiarCampos();
+
+    } catch (error) {
+        console.error("Error actualizando alimento:", error);
+    }
+}
+
+function limpiarCampos() {
+    // Limpia los campos de entrada
+    document.getElementById("nombre").value = "";
+    document.getElementById("tipo").value = "";
+    document.getElementById("nutricion").value = "";
+    document.getElementById("preparacion").value = "";
+    document.getElementById("fuente").value = "";
+
+    // Limpia la clave almacenada en el atributo de datos
+    document.getElementById("alimentoForm").removeAttribute("data-key");
+}
+
     //
     window.editarAlimento = function (key) {
     try {
