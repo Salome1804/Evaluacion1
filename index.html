@@ -116,73 +116,19 @@
     }
 
     
-     // Función para cargar datos al formulario al editar
- window.editarRegistro = function(key) {
-    const registroRef = ref(database, Mercedes_Gomez/${key});
+    window.editarAlimento = function (key) {
+        const alimento = obtenerAlimentoPorClave(key);
 
-    // Obtener los datos del registro seleccionado
-    onValue(registroRef, (snapshot) => {
-      const registro = snapshot.val();
+        // Rellena los campos de entrada con los valores actuales del alimento
+        document.getElementById("nombre").value = alimento.nombre;
+        document.getElementById("tipo").value = alimento.tipo;
+        document.getElementById("nutricion").value = alimento.nutricion;
+        document.getElementById("preparacion").value = alimento.preparacion;
+        document.getElementById("fuente").value = alimento.fuente;
 
-      // Llenar el formulario con los datos del registro
-      document.getElementById("nombre").value = registro.nombre;
-      document.getElementById("apellido").value = registro.apellido;
-      document.getElementById("email").value = registro.email;
-      document.getElementById("direccion").value = registro.direccion;
-      document.getElementById("celular").value = registro.celular;
-
-      // Cambiar el texto del botón a "Actualizar"
-      document.getElementById("editarButton").innerText = "Actualizar";
-
-      // Agregar la clave del registro al botón de editar para indicar que es una edición
-      document.getElementById("editarButton").setAttribute("onclick", guardarRegistro('${key}'));
-    });
-  };
-
-  // Función para guardar (actualizar) un registro
-  window.guardarRegistro = function(key) {
-    const nombre = document.getElementById("nombre").value;
-    const apellido = document.getElementById("apellido").value;
-    const email = document.getElementById("email").value;
-    const direccion = document.getElementById("direccion").value;
-    const celular = document.getElementById("celular").value;
-
-    // Verificar si es una edición o un nuevo registro
-    if (key) {
-      // Actualizar el registro en la base de datos
-      const registroRef = ref(database, Mercedes_Gomez/${key});
-      set(registroRef, {
-        nombre: nombre,
-        apellido: apellido,
-        email: email,
-        direccion: direccion,
-        celular: celular
-      });
-
-      // Restaurar el botón de "Enviar" después de actualizar
-      document.getElementById("guardarButton").style.display = "block";
-    } else {
-      // Agregar un nuevo registro a la base de datos
-      push(ref(database, 'Mercedes_Gomez'), {
-        nombre: nombre,
-        apellido: apellido,
-        email: email,
-        direccion: direccion,
-        celular: celular
-      });
+        // Puedes almacenar la clave del alimento que estás editando en un atributo de datos (data attribute)
+        document.getElementById("alimentoForm").setAttribute("data-key", key);
     }
-
-    // Limpiar el formulario después de actualizar o agregar
-    document.getElementById("nombre").value = "";
-    document.getElementById("apellido").value = "";
-    document.getElementById("email").value = "";
-    document.getElementById("direccion").value = "";
-    document.getElementById("celular").value = "";
-
-    // Ocultar el botón de "Actualizar"
-    document.getElementById("editarButton").style.display = "none";
-  };
-
 
 
     window.eliminarAlimento = function (key) {
