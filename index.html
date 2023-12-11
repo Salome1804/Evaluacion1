@@ -117,22 +117,26 @@
     //
     window.editarAlimento = function (key) {
     try {
-        // Obtén el objeto alimento por su clave
-        const alimento = obtenerAlimentoPorClave(key);
+        // Obtén el objeto alimento por su clave directamente aquí
+        const alimentoRef = ref(database, 'Mercedes_Gomez/' + key);
+        get(alimentoRef).then((snapshot) => {
+            const alimento = snapshot.val();
 
-        // Rellena los campos de entrada con los valores actuales del alimento
-        document.getElementById("nombre").value = alimento.nombre;
-        document.getElementById("tipo").value = alimento.tipo;
-        document.getElementById("nutricion").value = alimento.nutricion;
-        document.getElementById("preparacion").value = alimento.preparacion;
-        document.getElementById("fuente").value = alimento.fuente;
+            // Rellena los campos de entrada con los valores actuales del alimento
+            document.getElementById("nombre").value = alimento.nombre;
+            document.getElementById("tipo").value = alimento.tipo;
+            document.getElementById("nutricion").value = alimento.nutricion;
+            document.getElementById("preparacion").value = alimento.preparacion;
+            document.getElementById("fuente").value = alimento.fuente;
 
-        // Puedes almacenar la clave del alimento que estás editando en un atributo de datos (data attribute)
-        document.getElementById("alimentoForm").setAttribute("data-key", key);
+            // Puedes almacenar la clave del alimento que estás editando en un atributo de datos (data attribute)
+            document.getElementById("alimentoForm").setAttribute("data-key", key);
+        });
     } catch (error) {
         console.error("Error editando alimento:", error);
     }
 }
+
 
     window.eliminarAlimento = function (key) {
        
