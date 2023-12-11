@@ -78,7 +78,7 @@
   <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
-    import { getDatabase, ref, push,  onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
+    import { getDatabase, ref, push, update, onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
   
@@ -116,13 +116,13 @@
     }
 
     window.editarAlimento = function (key) {
-        const nombre = document.getElementById("nombre").value;
-        const tipo = document.getElementById("tipo").value;
-        const nutricion = document.getElementById("nutricion").value;
-        const preparacion = document.getElementById("preparacion").value;
-        const fuente = document.getElementById("fuente").value;
+    const nombre = document.getElementById("nombre").value;
+    const tipo = document.getElementById("tipo").value;
+    const nutricion = document.getElementById("nutricion").value;
+    const preparacion = document.getElementById("preparacion").value;
+    const fuente = document.getElementById("fuente").value;
 
-        const alimentoData = {
+    const alimentoData = {
         nombre: nombre,
         tipo: tipo,
         nutricion: nutricion,
@@ -130,7 +130,10 @@
         fuente: fuente
     };
 
-       push(ref(database, 'Mercedes_Gomez/' + key), alimentoData);
+    // Utiliza update para actualizar los datos existentes en la ubicación específica
+    update(ref(database, 'Mercedes_Gomez/' + key), alimentoData);
+}
+
 }
         
 
