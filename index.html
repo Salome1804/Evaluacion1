@@ -115,9 +115,10 @@
         push(ref(database, 'Mercedes_Gomez'), alimentoData);
     }
     //
-
     window.editarAlimento = function (key) {
-        try{
+    try {
+        // Obtén el objeto alimento por su clave
+        const alimento = obtenerAlimentoPorClave(key);
 
         // Rellena los campos de entrada con los valores actuales del alimento
         document.getElementById("nombre").value = alimento.nombre;
@@ -128,12 +129,10 @@
 
         // Puedes almacenar la clave del alimento que estás editando en un atributo de datos (data attribute)
         document.getElementById("alimentoForm").setAttribute("data-key", key);
-        } catch (error) {
+    } catch (error) {
         console.error("Error editando alimento:", error);
     }
 }
-    
-
 
     window.eliminarAlimento = function (key) {
        
