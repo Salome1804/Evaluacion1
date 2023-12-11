@@ -116,8 +116,22 @@
     }
 
     window.editarAlimento = function (key) {
+        const nombre = document.getElementById("nombre").value;
+        const tipo = document.getElementById("tipo").value;
+        const nutricion = document.getElementById("nutricion").value;
+        const preparacion = document.getElementById("preparacion").value;
+        const fuente = document.getElementById("fuente").value;
+
+        const alimentoData = {
+        nombre: nombre,
+        tipo: tipo,
+        nutricion: nutricion,
+        preparacion: preparacion,
+        fuente: fuente
+    };
+     set(ref(database, 'Mercedes_Gomez/' + key), alimentoData);
+}
         
-    }
 
     window.eliminarAlimento = function (key) {
        
