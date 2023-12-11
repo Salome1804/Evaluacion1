@@ -117,9 +117,10 @@
     //
     window.editarAlimento = function (key) {
     try {
-        // Obtén el objeto alimento por su clave directamente aquí
         const alimentoRef = ref(database, 'Mercedes_Gomez/' + key);
-        get(alimentoRef).then((snapshot) => {
+
+        // Escuchar cambios en el valor de la referencia del alimento
+        onValue(alimentoRef, (snapshot) => {
             const alimento = snapshot.val();
 
             // Rellena los campos de entrada con los valores actuales del alimento
@@ -136,6 +137,7 @@
         console.error("Error editando alimento:", error);
     }
 }
+
 
 
     window.eliminarAlimento = function (key) {
