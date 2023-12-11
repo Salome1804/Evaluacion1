@@ -118,7 +118,7 @@
     
      // Función para cargar datos al formulario al editar
  window.editarRegistro = function(key) {
-    const registroRef = ref(database, Roberth_Torres/${key});
+    const registroRef = ref(database, Mercedes_Gomez/${key});
 
     // Obtener los datos del registro seleccionado
     onValue(registroRef, (snapshot) => {
@@ -150,7 +150,7 @@
     // Verificar si es una edición o un nuevo registro
     if (key) {
       // Actualizar el registro en la base de datos
-      const registroRef = ref(database, Roberth_Torres/${key});
+      const registroRef = ref(database, Mercedes_Gomez/${key});
       set(registroRef, {
         nombre: nombre,
         apellido: apellido,
